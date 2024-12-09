@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .button-container {
+            margin: 20px 0;
+        }
+        .clear-button {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .clear-button:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <h1>Live Attendance System</h1>
+
+    <!-- Attendance Data Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in attendance_data %}
+            <tr>
+                <td>{{ entry.name }}</td>
+                <td>{{ entry.date }}</td>
+                <td>{{ entry.time }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Clear Attendance Data Button -->
+    <div class="button-container">
+        <form action="/clear_attendance" method="POST">
+            <button type="submit" class="clear-button">Clear All Attendance Data</button>
+        </form>
+    </div>
+
+    <!-- Video Feed -->
+    <h2>Video Feed</h2>
+    <img src="{{ url_for('video_feed') }}" width="640" height="480" alt="Live Video Feed" />
+</body>
+</html>
